@@ -11,6 +11,6 @@ import br.univille.novostalentos.entity.Cliente;
 @Repository
 public interface ClienteRepository 
     extends JpaRepository<Cliente,Long>{
-    /*select * from cliente where nome like '%zinho' */
+    /*select * from cliente where nome like '%zinho%' */
     List<Cliente> findByNomeIgnoreCaseContaining(@Param("nome") String nome);
 }
