@@ -1,10 +1,10 @@
 package br.univille.novostalentos.controller;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
+//import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -55,8 +55,11 @@ public class ClienteController {
     @GetMapping("/alterar/{id}")
     public ModelAndView alterar(@PathVariable("id") long id){
         var umCliente = service.findById(id);
-
-        return new ModelAndView("cliente/form","cliente",umCliente);
+        var listaCidades = cidadeService.getAll();
+        HashMap<String,Object> dados = new HashMap<>();
+        dados.put("cliente",umCliente);
+        dados.put("listaCidades",listaCidades);
+        return new ModelAndView("cliente/form", dados);
     }
     @GetMapping("/delete/{id}")
     public ModelAndView delete(@PathVariable("id") long id){

@@ -2,6 +2,7 @@ package br.univille.novostalentos.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,7 +25,6 @@ public class Cliente {
     @NotBlank(message = "Campo nome não pode ser em branco")
     private String nome;
     @Column(length = 3000)
-    @NotEmpty(message = "Campo endereço não pode ser vazio")
     private String endereco;
 
     @Pattern(regexp = "Masculino|Feminino",
@@ -36,17 +35,17 @@ public class Cliente {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
     private Cidade cidadeResidencia;
     
+    public long getId() {
+        return id;
+    }
     public Cidade getCidadeResidencia() {
         return cidadeResidencia;
     }
     public void setCidadeResidencia(Cidade cidadeResidencia) {
         this.cidadeResidencia = cidadeResidencia;
-    }
-    public long getId() {
-        return id;
     }
     public Date getDataNascimento() {
         return dataNascimento;
