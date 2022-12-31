@@ -25,8 +25,6 @@ public class Venda {
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "yyyy-mm-dd")
     private Date data;
-    private boolean irn3uwqi;
-    
     
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH})
     private Cliente comprador;
@@ -59,11 +57,5 @@ public class Venda {
     }
     public void setColItens(List<ItemVenda> colItens) {
         this.colItens = colItens;
-    }
-    public boolean isIrn3uwqi() {
-        return irn3uwqi;
-    }
-    public void setIrn3uwqi(boolean irn3uwqi) {
-        this.irn3uwqi = irn3uwqi;
     }
 }
